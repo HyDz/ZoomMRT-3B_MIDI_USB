@@ -31,21 +31,13 @@ for (int i=36; i<=52; i++){digitalWrite(i, HIGH);delay(250);} // Toggle Leds ON
 for (int i=36; i<=52; i++){digitalWrite(i, LOW);delay(250);} // Toggle Leds OFF
  
 attachInterrupt(JogWheelPinA, sendJogWheel, RISING); // interrupts
+
+
 }
 
 void loop(){
 void getMidiIn();
 void setMidiOut();
-}
-
-void noteOn(byte channel, byte pitch, byte velocity) {
-  midiEventPacket_t noteOn = {0x09, 0x90 | channel, pitch, velocity};
-  MidiUSB.sendMIDI(noteOn);
-}
-
-void noteOff(byte channel, byte pitch, byte velocity) {
-  midiEventPacket_t noteOff = {0x08, 0x80 | channel, pitch, velocity};
-  MidiUSB.sendMIDI(noteOff);
 }
 
 void controlChange(byte channel, byte control, byte value) {
@@ -343,15 +335,14 @@ void sendJogWheel()
  
   // track 0 to 400
   valJogWheel = valJogWheel % CPR;
-
-  mappedvalJogWheel = map(abs(valJogWheel), 0, JogWheelMaxval, 0, 127);
-  
+ if (valJogWheel >= JogWheelToggle) { //Prevent Intempestive Move
   controlChange(MidiChannel, 63, 127); // Send CC For JogWheel Activity
+  mappedvalJogWheel = map(abs(valJogWheel), 0, JogWheelMaxval, 0, 127); //map Jog Wheel value from 0 to 127
   JogWheelActive = 1;  
-    if (currentDirection = CLOCKWISE){
+    if (currentDirection = CLOCKWISE) {
      controlChange(MidiChannel, 61, mappedvalJogWheel); // Send CC For JogWheel Direction
       }
-     if (currentDirection = COUNTER_CLOCKWISE){
+    if (currentDirection = COUNTER_CLOCKWISE) {
      controlChange(MidiChannel, 62, mappedvalJogWheel); // Send CC For JogWheel Direction
       }
   MidiUSB.flush(); // Be sure CC is Send
