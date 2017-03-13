@@ -5,6 +5,7 @@
 - [x] inputs.h
 - [x] outputs.h
 - [ ] Shift command
+- [ ] Use attach interrupts for all inputs
 - [ ] Inputs PCB
 - [x] Outputs PCB
 - [ ] Cut Traces
