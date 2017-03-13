@@ -13,4 +13,6 @@
 - [ ] Wire Outputs
 - [ ] Jog Wheel Test
 - [x] Jog Wheel Integration
+- [ ] BPM Count Test
+- [ ] BPM Count Integration
 - [ ] Do Traktor Map
