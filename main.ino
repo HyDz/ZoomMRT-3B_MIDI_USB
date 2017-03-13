@@ -48,6 +48,19 @@ void controlChange(byte channel, byte control, byte value) {
 
 void getMidiIn(){
 
+ midiEventPacket_t rx;
+ rx = MidiUSB.read();
+    if (rx.header != 0) {
+     Serial.print("Received: ");
+      Serial.print(rx.header, HEX);
+      Serial.print("-");
+      Serial.print(rx.byte1, HEX);
+      Serial.print("-");
+      Serial.print(rx.byte2, HEX);
+      Serial.print("-");
+      Serial.println(rx.byte3, HEX);
+    }
+ 
 }
 
 void setMidiOut(){
