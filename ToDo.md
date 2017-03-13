@@ -11,5 +11,5 @@
 - [ ] Wire Inputs
 - [ ] Wire Outputs
 - [ ] Jog Wheel Test
-- [ ] Jog Wheel Integration
+- [x] Jog Wheel Integration
 - [ ] Do Traktor Map
