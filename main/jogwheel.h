@@ -18,53 +18,11 @@
 #define COUNTER_CLOCKWISE    2       // direction constant
  
 // variables modified by interrupt handler must be declared as volatile
-volatile long encoder0Position = 0;
-volatile long interruptsReceived = 0;
+volatile long valJogWheel = 0;
  
 // track direction: 0 = counter-clockwise; 1 = clockwise
 short currentDirection = CLOCKWISE;
  
 // track last position so we know whether it's worth printing new output
-long previousPosition = 0;
- 
+long lastJogWheel = 0;
 
-void loop()
-{
-  // only display position info if has changed
-  if (encoder0Position != previousPosition )
-  {
-    Serial.print(encoder0Position, DEC);
-    Serial.print("\t");
-    Serial.print(currentDirection == CLOCKWISE ? "clockwise" : "counter-clockwise");
-    Serial.print("\t");
-    Serial.println(interruptsReceived, DEC);
-    previousPosition = encoder0Position;
-  }
-}
- 
-// interrupt function needs to do as little as possible
-void onInterrupt()
-{
-  // read both inputs
-  int a = digitalRead(ENCODER0PINA);
-  int b = digitalRead(ENCODER0PINB);
- 
-  if (a == b )
-  {
-    // b is leading a (counter-clockwise)
-    encoder0Position--;
-    currentDirection = COUNTER_CLOCKWISE;
-  }
-  else
-  {
-    // a is leading b (clockwise)
-    encoder0Position++;
-    currentDirection = CLOCKWISE;
-  }
- 
-  // track 0 to 1249
-  encoder0Position = encoder0Position % CPR;
- 
-  // track the number of interrupts
-  interruptsReceived++;
-}
