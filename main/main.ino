@@ -11,7 +11,11 @@
 #include "inputs.h"
 #include "outputs.h"
 
-int MidiChannel = 2;
+int MidiChannel = 2; // channel 3 (channel 1 has value 0)
+
+//Pulse per quarter note. Each beat has 24 pulses.
+//Tempo is based on software inner BPM.
+int ppqn = 0;
 
 void setup(){
 Serial.begin(115200);
