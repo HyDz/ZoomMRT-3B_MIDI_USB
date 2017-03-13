@@ -16,14 +16,14 @@ int MidiChannel = 2;
 void setup(){
 Serial.begin(115200);
 
-for (int i=2, i<=7, i++){pinMode(i, INPUT);} // Set Inputs
+for (int i=2; i<=7; i++){pinMode(i; INPUT);} // Set Inputs
 
-for (int i=22, i<=35, i++){pinMode(i, INPUT);} // Set Inputs
+for (int i=22; i<=35; i++){pinMode(i; INPUT);} // Set Inputs
 
-for (int i=36, i<=52, i++){pinMode(i, OUTPUT);} // Set Outputs
+for (int i=36; i<=52; i++){pinMode(i; OUTPUT);} // Set Outputs
  
-for (int i=36, i<=52, i++){digitalWrite(i, HIGH);delay(250);} // Toggle Leds ON
-for (int i=36, i<=52, i++){digitalWrite(i, LOW);delay(250);} // Toggle Leds OFF
+for (int i=36; i<=52; i++){digitalWrite(i; HIGH);delay(250);} // Toggle Leds ON
+for (int i=36; i<=52; i++){digitalWrite(i; LOW);delay(250);} // Toggle Leds OFF
 }
 
 void loop(){
