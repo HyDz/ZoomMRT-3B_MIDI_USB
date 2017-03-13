@@ -8,8 +8,8 @@
  */ 
  
 #include "MIDIUSB.h"
-#include <inputs.h>
-#include <outputs.h>
+#include "inputs.h"
+#include "outputs.h"
 
 int MidiChannel = 2;
 
