@@ -4,41 +4,76 @@
  * Created: 13/3/2017 
  * Author: HyDz
  * USB Midified ZoomMRT-3B for Traktor
- * Declare Digitals Inputs
- */ 
+ * Declare Inputs
+ */
 
-const int JogWheelPinA = 8;
-const int JogWheelPinB = 9;
+/**************************************************************************************************
+*                                                                                                 *
+*  Declare Pins for Rotary Encoder                                                                *
+*  This section is based on Brenda A Bell work.                                                   *
+*  Permalink: http://www.brendaabell.com/2014/02/arduino-series-working-with-an-optical-encoder/  *
+*                                                                                                 *
+***************************************************************************************************/
 
-const int SongSwitch = 2;
+#define JogWheelPinA         8      // this pin needs to support interrupts
+#define JogWheelPinB         9      // no interrupt required
+#define CPR                  400    // encoder cycles per revolution
+#define CLOCKWISE            1       // direction constant
+#define COUNTER_CLOCKWISE    2       // direction constant
+ 
+int JogWheelActive = 0;
+int JogWheelMaxval = 200;
+// variables modified by interrupt handler must be declared as volatile
+volatile long valJogWheel = 0;
+volatile long mappedvalJogWheel = 0;
+ // track direction: 0 = counter-clockwise; 1 = clockwise
+short currentDirection = CLOCKWISE;
+
+
+// Declare Digitals Inputs
+
+#define SongSwitch  2
+
 int valSongSwitch = 0;
 int lastSongSwitch = 0;
 
-const int PatternSwitch = 3;
+
+#define PatternSwitch  3
+
 int valPatternSwitch = 0;
 int lastPatternSwitch = 0;
 
-const int KitSwitch = 4;
+
+#define KitSwitch  4
+
 int valKitSwitch = 0;
 int lastKitSwitch = 0;
 
-const int InsertSwitch = 5;
+
+#define InsertSwitch  5
+
 int valInsertSwitch =0;
 int lastInsertSwitch = 0;
 
-const int DeleteSwitch = 6;
+
+#define DeleteSwitch  6
+
 int valDeleteSwitch = 0;
 int lastDeleteSwitch = 0;
 
-const int MinusSwitch = 7;
+
+#define MinusSwitch  7
+
 int valMinusSwitch = 0;
 int lastMinusSwitch = 0;
 
-const int PlusSwitch = 22;
+
+#define PlusSwitch  22
+
 int valPlusSwitch = 0;
 int lastPlusSwitch = 0;
 
-const int TempoSwitch = 23;
+#define TempoSwitch  23
 int valTempoSwitch = 0;
 int lastTempoSwitch = 0;
 
