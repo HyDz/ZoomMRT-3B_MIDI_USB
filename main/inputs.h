@@ -6,7 +6,10 @@
  * USB Midified ZoomMRT-3B for Traktor
  * Declare Digitals Inputs
  */ 
- 
+
+const int JogWheelPinA = 8;
+const int JogWheelPinB = 9;
+
 const int SongSwitch = 2;
 int valSongSwitch = 0;
 int lastSongSwitch = 0;
