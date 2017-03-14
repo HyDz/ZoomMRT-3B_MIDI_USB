@@ -14,7 +14,7 @@ char* functionNames[NUM_FUNCTIONS] = { "sendSong", "sendPattern", "sendKit", "se
 const byte attachedPins[NUM_FUNCTIONS] ={ SongSwitch, PatternSwitch, KitSwitch, InsertSwitch, DeleteSwitch, MinusSwitch, PlusSwitch, TempoSwitch, StopSwitch, PlaySwitch, RecSwitch, BankPad, CrashPad, CupPad, RidePad, FunctionPad, KickPad, SnarePad, ClosedHatPad, OpenHatPad}; //Declare Inputs Pins in the same order than names
 //String tempfunct;
 
-void interruptsfunctions.begin(){
+void interruptsfunctionsinit(){
   attachInterrupt(JogWheelPinA, sendJogWheel, RISING); // interrupts on rising 
   for (int i = 0; i < NUM_BUTTONS; i++) {
   attachInterrupt(attachedPins[i], functionNames[i], LOW); // interrupts when button is pressed
