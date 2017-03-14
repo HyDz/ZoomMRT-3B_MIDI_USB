@@ -4,7 +4,7 @@
 - [x] Main.ino
 - [x] inputs.h
 - [x] outputs.h
-- [x] Use attach interrupts for all inputs
+
 - [x] Shift command
 - [ ] Inputs PCB
 - [x] Outputs PCB
@@ -19,3 +19,5 @@
 
 - [ ] Better Get Midi In Function
 - [x] Better Declaration and set of pins
+
+- [ ] Use attach interrupts for all inputs // Bad Idea??
