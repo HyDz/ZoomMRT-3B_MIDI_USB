@@ -23,7 +23,7 @@ void setup(){
 Serial.begin(115200);
 inputs.begin(); // set inputs
 outputs.begin(); // set outputs
-attachInterrupt(JogWheelPinA, sendJogWheel, RISING); // interrupts
+interruptsfunctions.begin(); // set interrupts
 
 
 }
