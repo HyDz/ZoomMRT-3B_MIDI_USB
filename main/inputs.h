@@ -37,6 +37,26 @@ short currentDirection = CLOCKWISE;
 int JogWheelActive = 0;
 
 // Declare Digitals Inputs
+int SongSwitch = 2;
+int PatternSwitch = 3;
+int KitSwitch = 4;
+int InsertSwitch = 5;
+int DeleteSwitch = 6;
+int MinusSwitch = 7;
+int PlusSwitch = 22;
+int TempoSwitch = 23;
+int StopSwitch = 24;
+int PlaySwitch = 25;
+int RecSwitch = 26;
+int BankPad = 27;
+int CrashPad = 28;
+int CupPad = 29;
+int RidePad = 30;
+int FunctionPad = 31;
+int KickPad = 32;
+int SnarePad = 33;
+int ClosedHatPad = 34;
+int OpenHatPad = 35;
 
 char* inputsNames[NUM_BUTTONS] = { "SongSwitch", "PatternSwitch", "KitSwitch", "InsertSwitch", "DeleteSwitch", "MinusSwitch", "PlusSwitch", "TempoSwitch", "StopSwitch", "PlaySwitch", "RecSwitch", "BankPad", "CrashPad", "CupPad", "RidePad", "FunctionPad", "KickPad", "SnarePad", "ClosedHatPad", "OpenHatPad" }; 
 const byte inputPins[NUM_BUTTONS] ={ 2, 3, 4, 5, 6, 7, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35}; //Declare Inputs Pins in the same order than names
@@ -48,7 +68,7 @@ void inputsinit(){
   pinMode(JogWheelPinB, INPUT);
  
  for (int i = 0; i < NUM_BUTTONS; i++) {
- #define inputsNames[i]  inputPins[i]; // Declare Names and Pins
+ // #define inputsNames[i]  inputPins[i] // Can't recursive declare pin names
  
  pinMode(inputPins[i], INPUT_PULLUP); // Use Pull up internal resistor switch wired between ground and input
  tempval = "val" + inputPins[i];
