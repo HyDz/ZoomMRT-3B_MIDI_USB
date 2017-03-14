@@ -4,8 +4,8 @@
 - [x] Main.ino
 - [x] inputs.h
 - [x] outputs.h
+- [ ] Use attach interrupts for all inputs // In Progress
 - [ ] Shift command
-- [ ] Use attach interrupts for all inputs
 - [ ] Inputs PCB
 - [x] Outputs PCB
 - [ ] Cut Traces
