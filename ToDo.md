@@ -16,3 +16,6 @@
 - [ ] BPM Count Test
 - [ ] BPM Count Integration
 - [ ] Do Traktor Map
+
+- [ ] Better Get Midi In Function
+- [ ] Better Declaration and set of pins
