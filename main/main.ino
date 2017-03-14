@@ -17,7 +17,7 @@ void controlChange(byte channel, byte control, byte value) {
 
 #include "inputs.h"
 #include "outputs.h"
-#include "interruptsfunctions.h"
+
 
 
 
@@ -30,7 +30,6 @@ void setup() {
   Serial.begin(115200);
   inputsinit(); // set inputs
   outputsinit(); // set outputs
-//  interruptsfunctionsinit(); // set interrupts
 
 
 }
