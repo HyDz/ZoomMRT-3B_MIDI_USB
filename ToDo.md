@@ -4,7 +4,7 @@
 - [x] Main.ino
 - [x] inputs.h
 - [x] outputs.h
-- [x] Use attach interrupts for all inputs // In Progress
+- [x] Use attach interrupts for all inputs
 - [x] Shift command
 - [ ] Inputs PCB
 - [x] Outputs PCB
