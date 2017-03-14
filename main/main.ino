@@ -16,21 +16,13 @@ const int MidiChannel = 2; // channel 3 (channel 1 has value 0)
 
 //Pulse per quarter note. Each beat has 24 pulses.
 //Tempo is based on software inner BPM.
-int ppqn = 0;
+// int ppqn = 0; //not yet implemented
 
 void setup(){
 
 Serial.begin(115200);
-
-for (int i=2; i<=9; i++){pinMode(i, INPUT);} // Set Inputs
-
-for (int i=22; i<=35; i++){pinMode(i, INPUT);} // Set Inputs
-
-for (int i=36; i<=52; i++){pinMode(i, OUTPUT);} // Set Outputs
- 
-for (int i=36; i<=52; i++){digitalWrite(i, HIGH);delay(250);} // Toggle Leds ON
-for (int i=36; i<=52; i++){digitalWrite(i, LOW);delay(250);} // Toggle Leds OFF
- 
+inputs.begin(); // set inputs
+outputs.begin(); // set outputs
 attachInterrupt(JogWheelPinA, sendJogWheel, RISING); // interrupts
 
 
