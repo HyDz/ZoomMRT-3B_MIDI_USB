@@ -53,7 +53,7 @@ void inputs.begin(){
  pinMode(inputPins[i], INPUT_PULLUP); // Use Pull up internal resistor switch wired between ground and input
  tempval = "val" + inputPins[i];
  templast = "last" + inputPins[i];
- tempdebounce = "last" + inputPins[i]; + "DebounceTime";
+ tempdebounce = templast + "DebounceTime";
  tempstate = inputPins[i]; + "State";
  
  int tempval = 0; // Read Value
