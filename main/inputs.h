@@ -15,28 +15,28 @@
 *                                                                                                 *
 ***************************************************************************************************/
 
-#define JogWheelPinA         8      // this pin needs to support interrupts
-#define JogWheelPinB         9      // no interrupt required
-#define CPR                  400    // encoder cycles per revolution
+#define JogWheelPinA         8       // this pin needs to support interrupts
+#define JogWheelPinB         9       // no interrupt required
+#define CPR                  400     // encoder cycles per revolution
 #define CLOCKWISE            1       // direction constant
 #define COUNTER_CLOCKWISE    2       // direction constant
- 
-int JogWheelActive = 0;
-const int JogWheelMaxval = 4000; // Increase to have a smoother effect
-const int JogWheelToggle = 200; // To prevent intempestive move
+#define JogWheelMaxval       4000    // Increase to have a smoother effect
+#define JogWheelToggle       200     // To prevent intempestive move decrease for more sensitive
+
+#define debounceSwitchDelay  50      // the debounce time of switchs; to prevent flickers. Increase if the output flickers
+#define debouncePadDelay     20      // the debounce time of pads; to prevent flickers. Increase if the output flickers
+#define NUM_BUTTONS          20      // Number of digital inputs use switchs and pad only 
+
+
 // variables modified by interrupt handler must be declared as volatile
 volatile long valJogWheel = 0;
 volatile long mappedvalJogWheel = 0;
  // track direction: 0 = counter-clockwise; 1 = clockwise
 short currentDirection = CLOCKWISE;
-
+// track jogwheel activity 0 = inactive; 1 = active
+int JogWheelActive = 0;
 
 // Declare Digitals Inputs
-
-const unsigned long debounceSwitchDelay = 50;    // the debounce time of switchs; to prevent flickers. Increase if the output flickers
-const unsigned long debouncePadDelay = 20;    // the debounce time of pads; to prevent flickers. Increase if the output flickers
-
-#define NUM_BUTTONS  20 // Number of switchs and pad only digital inputs
 
 char* inputsNames[NUM_BUTTONS] = { "SongSwitch", "PatternSwitch", "KitSwitch", "InsertSwitch", "DeleteSwitch", "MinusSwitch", "PlusSwitch", "TempoSwitch", "StopSwitch", "PlaySwitch", "RecSwitch", "BankPad", "CrashPad", "CupPad", "RidePad", "FunctionPad", "KickPad", "SnarePad", "ClosedHatPad", "OpenHatPad" }; 
 const byte inputPins[NUM_BUTTONS] ={ 2, 3, 4, 5, 6, 7, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35}; //Declare Inputs Pins in the same order than names
