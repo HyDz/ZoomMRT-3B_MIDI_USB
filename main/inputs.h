@@ -22,7 +22,7 @@
 #define COUNTER_CLOCKWISE    2       // direction constant
  
 int JogWheelActive = 0;
-int JogWheelMaxval = 4000;
+int JogWheelMaxval = 4000; // Increase to have a smoother effect
 int JogWheelToggle = 200; // To prevent intempestive move
 // variables modified by interrupt handler must be declared as volatile
 volatile long valJogWheel = 0;
