@@ -18,4 +18,4 @@
 - [ ] Do Traktor Map
 
 - [ ] Better Get Midi In Function
-- [ ] Better Declaration and set of pins
+- [x] Better Declaration and set of pins
