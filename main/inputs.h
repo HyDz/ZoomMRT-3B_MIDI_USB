@@ -166,7 +166,7 @@ int OpenHatPadState = 0;
 
 char* inputsNames[NUM_BUTTONS] = { "SongSwitch", "PatternSwitch", "KitSwitch", "InsertSwitch", "DeleteSwitch", "MinusSwitch", "PlusSwitch", "TempoSwitch", "StopSwitch", "PlaySwitch", "RecSwitch", "BankPad", "CrashPad", "CupPad", "RidePad", "FunctionPad", "KickPad", "SnarePad", "ClosedHatPad", "OpenHatPad" };
 const byte inputPins[NUM_BUTTONS] = { 2, 3, 4, 5, 6, 7, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35}; //Declare Inputs Pins in the same order than names
-String tempval, templast, tempdebounce, tempstate;
+
 
 void inputsinit() {
 
@@ -174,18 +174,7 @@ void inputsinit() {
   pinMode(JogWheelPinB, INPUT);
 
   for (int i = 0; i < NUM_BUTTONS; i++) {
-    // #define inputsNames[i]  inputPins[i] // Can't recursive declare pin names
-
     pinMode(inputPins[i], INPUT_PULLUP); // Use Pull up internal resistor switch wired between ground and input
-    tempval = "val" + inputPins[i];
-    templast = "last" + inputPins[i];
-    tempdebounce = templast + "DebounceTime";
-    tempstate = inputPins[i]; + "State";
-
-    int tempval = 0; // Read Value
-    int templast = 0; // Last Read Value
-    unsigned long tempdebounce = 0;  // the last time the output pin was toggled
-    int tempstate; // Switch or Pad State
   }
 
 }
