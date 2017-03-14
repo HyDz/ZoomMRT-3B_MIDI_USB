@@ -33,121 +33,30 @@ short currentDirection = CLOCKWISE;
 
 // Declare Digitals Inputs
 
-#define SongSwitch  2
+const unsigned long debounceSwitchDelay = 50;    // the debounce time of switchs; to prevent flickers. Increase if the output flickers
+const unsigned long debouncePadDelay = 20;    // the debounce time of pads; to prevent flickers. Increase if the output flickers
 
-int valSongSwitch = 0;
-int lastSongSwitch = 0;
+#define NUM_BUTTONS  20 // Number of switchs and pad only digital inputs
 
+char* inputsNames[NUM_BUTTONS] = { "SongSwitch", "PatternSwitch", "KitSwitch", "InsertSwitch", "DeleteSwitch", "MinusSwitch", "PlusSwitch", "TempoSwitch", "StopSwitch", "PlaySwitch", "RecSwitch", "BankPad", "CrashPad", "CupPad", "RidePad", "FunctionPad", "KickPad", "SnarePad", "ClosedHatPad", "OpenHatPad" }; 
+const byte inputPins[NUM_BUTTONS] ={ 2, 3, 4, 5, 6, 7, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35}; //Declare Inputs Pins in the same order than names
+String tempval, templast, tempdebounce, tempstate;
 
-#define PatternSwitch  3
+void inputs.begin(){
+ 
+ for (int i = 0; i < NUM_BUTTONS; i++) {
+ #define inputsNames[i]  inputPins[i]; // Declare Name and Pins
+ 
+ pinMode(inputPins[i], INPUT_PULLUP); // Use Pull up internal resistor switch wired between ground and input
+ tempval = "val" + inputPins[i];
+ templast = "last" + inputPins[i];
+ tempdebounce = "last" + inputPins[i]; + "DebounceTime";
+ tempstate = inputPins[i]; + "State";
+ 
+ int tempval = 0; // Read Value
+ int templast = 0; // Last Read Value
+ unsigned long tempdebounce = 0;  // the last time the output pin was toggled
+ int tempstate; // Switch or Pad State
+ }
 
-int valPatternSwitch = 0;
-int lastPatternSwitch = 0;
-
-
-#define KitSwitch  4
-
-int valKitSwitch = 0;
-int lastKitSwitch = 0;
-
-
-#define InsertSwitch  5
-
-int valInsertSwitch =0;
-int lastInsertSwitch = 0;
-
-
-#define DeleteSwitch  6
-
-int valDeleteSwitch = 0;
-int lastDeleteSwitch = 0;
-
-
-#define MinusSwitch  7
-
-int valMinusSwitch = 0;
-int lastMinusSwitch = 0;
-
-
-#define PlusSwitch  22
-
-int valPlusSwitch = 0;
-int lastPlusSwitch = 0;
-
-
-#define TempoSwitch  23
-
-int valTempoSwitch = 0;
-int lastTempoSwitch = 0;
-
-
-#define StopSwitch  24
-
-int valStopSwitch = 0;
-int lastStopSwitch = 0;
-
-
-#define PlaySwitch  25
-
-int valPlaySwitch = 0;
-int lastPlaySwitch = 0;
-
-
-#define RecSwitch  26
-
-int valRecSwitch = 0;
-int lastRecSwitch = 0;
-
-
-#define BankPad  27
-
-int valBankPad = 0;
-int lastBankPad = 0;
-
-
-#define CrashPad  28
-
-int valCrashPad = 0;
-int lastCrashPad = 0;
-
-
-#define CupPad  29
-
-int valCupPad = 0;
-int lastCupPad = 0;
-
-
-#define RidePad  30
-
-int valRidePad = 0;
-int lastRidePad = 0;
-
-
-#define FunctionPad  31
-
-int valFunctionPad = 0;
-int lastFunctionPad = 0;
-
-
-#define KickPad  32
-
-int valKickPad = 0;
-int lastKickPad = 0;
-
-
-#define SnarePad  33
-
-int valSnarePad = 0;
-int lastSnarePad = 0;
-
-
-#define ClosedHatPad  34
-
-int valClosedHatPad = 0;
-int lastClosedHatPad = 0;
-
-
-#define OpenHatPad  35
-
-int valOpenHatPad = 0;
-int lastOpenHatPad = 0;
+}
