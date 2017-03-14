@@ -21,9 +21,9 @@ const int MidiChannel = 2; // channel 3 (channel 1 has value 0)
 void setup(){
 
 Serial.begin(115200);
-inputs.begin(); // set inputs
-outputs.begin(); // set outputs
-interruptsfunctions.begin(); // set interrupts
+inputsinit(); // set inputs
+outputsinit(); // set outputs
+interruptsfunctionsinit(); // set interrupts
 
 
 }
