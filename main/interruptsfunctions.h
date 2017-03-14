@@ -1,37 +1,57 @@
-void sendJogWheel()
-{
- // read both inputs
-  int a = digitalRead(JogWheelPinA);
-  int b = digitalRead(JogWheelPinB);
+/*
+ * ZoomMRT-3B_MIDI_USB
+ *
+ * Created: 13/3/2017 
+ * Author: HyDz
+ * USB Midified ZoomMRT-3B for Traktor
+ * Interrupts Functions
+ * What is done when switchs, pads or jog wheel is active
+ */
+
+#define NUM_FUNCTIONS   20
+
+char* functionNames[NUM_FUNCTIONS] = { "sendSong", "sendPattern", "sendKit", "sendInsert", "sendDelete", "sendMinus", "sendPlus", "sendTempo", "sendStop", "sendPlay", "sendRec", "sendBank", "sendCrash", "sendCup", "sendRide", "sendFunction", "sendKick", "sendSnare", "sendClosedHat", "sendOpenHat" }; 
+const byte attachedPins[NUM_FUNCTIONS] ={ SongSwitch, PatternSwitch, KitSwitch, InsertSwitch, DeleteSwitch, MinusSwitch, PlusSwitch, TempoSwitch, StopSwitch, PlaySwitch, RecSwitch, BankPad, CrashPad, CupPad, RidePad, FunctionPad, KickPad, SnarePad, ClosedHatPad, OpenHatPad}; //Declare Inputs Pins in the same order than names
+//String tempfunct;
+
+void interruptsfunctions.begin(){
+  attachInterrupt(JogWheelPinA, sendJogWheel, RISING); // interrupts on rising 
+  for (int i = 0; i < NUM_BUTTONS; i++) {
+  attachInterrupt(attachedPins[i], functionNames[i], LOW); // interrupts when btton is pressed
+ // tempfunct = "void " + functionNames[i] + "(){" + 
+  }
+}
+
+
+
+void sendJogWheel() { // read both inputs
+  
+int a = digitalRead(JogWheelPinA);
+int b = digitalRead(JogWheelPinB);
  
-  if (a == b )
-  {
-    // b is leading a (counter-clockwise)
+  if (a == b ) { // b is leading a (counter-clockwise)
     valJogWheel--;
     currentDirection = COUNTER_CLOCKWISE;
   }
-  else
-  {
-    // a is leading b (clockwise)
+  else { // a is leading b (clockwise)
     valJogWheel++;
     currentDirection = CLOCKWISE;
   }
  
-  // track 0 to 400
-  valJogWheel = valJogWheel % CPR;
- if (valJogWheel >= JogWheelToggle) { //Prevent Intempestive Move or flickering
-  controlChange(MidiChannel, 63, 127); // Send CC For JogWheel Activity
-  mappedvalJogWheel = map(abs(valJogWheel), 0, JogWheelMaxval, 0, 127); //map Jog Wheel value from 0 to 127
-  JogWheelActive = 1;  
-    if (currentDirection = CLOCKWISE) {
-     controlChange(MidiChannel, 61, mappedvalJogWheel); // Send CC For JogWheel Direction
-      }
-    if (currentDirection = COUNTER_CLOCKWISE) {
-     controlChange(MidiChannel, 62, mappedvalJogWheel); // Send CC For JogWheel Direction
-      }
-  MidiUSB.flush(); // Be sure CC is Send
-  valJogWheel = 0;
-  }
+valJogWheel = valJogWheel % CPR; // track 0 to 400
+  if (valJogWheel >= JogWheelToggle) { //Prevent Intempestive Move or flickering
+   controlChange(MidiChannel, 63, 127); // Send CC For JogWheel Activity
+   mappedvalJogWheel = map(abs(valJogWheel), 0, JogWheelMaxval, 0, 127); //map Jog Wheel value from 0 to 127
+   JogWheelActive = 1;  
+     if (currentDirection = CLOCKWISE) {
+      controlChange(MidiChannel, 61, mappedvalJogWheel); // Send CC For JogWheel FORWARD Direction
+       }
+     if (currentDirection = COUNTER_CLOCKWISE) {
+      controlChange(MidiChannel, 62, mappedvalJogWheel); // Send CC For JogWheel REWARD Direction
+       }
+   MidiUSB.flush(); // Be sure CC is Send
+   valJogWheel = 0;
+   }
 }
  
 void sendSong(){
