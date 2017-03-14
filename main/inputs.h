@@ -44,8 +44,11 @@ String tempval, templast, tempdebounce, tempstate;
 
 void inputs.begin(){
  
+  pinMode(JogWheelPinA, INPUT); //DeclareJogWheel Pins
+  pinMode(JogWheelPinB, INPUT);
+ 
  for (int i = 0; i < NUM_BUTTONS; i++) {
- #define inputsNames[i]  inputPins[i]; // Declare Name and Pins
+ #define inputsNames[i]  inputPins[i]; // Declare Names and Pins
  
  pinMode(inputPins[i], INPUT_PULLUP); // Use Pull up internal resistor switch wired between ground and input
  tempval = "val" + inputPins[i];
