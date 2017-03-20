@@ -11,8 +11,8 @@
 // I want to glow them at 10mA since they can draws 20mA and the Arduino DUE digital out 15mA.
 // Some digital pins of the Arduino Due are limited to 3mA (2, 13, 16, 17, 18, 20, 21, 22, 43, 52), so I'll avoid them.
 // https://www.arduino.cc/en/Hacking/PinMappingSAM3X
-// LEDs are wired in common-anode the plus potential is the same on all LEDs    Anode  --|<-- Cathode
-// You have to put the cathode to low (GND) in order to glow LED.
+// LEDs are wired in common-anode the plus potential is the same on all LEDs  Cathode(-) "Arduino Out 1" ---|<--|  Anode(+) "Vcc"
+// You have to put the cathode to low (GND) in order to glow LED.                        "Arduino Out 2" ---|<--| "Vcc"                    
 
 #define NUM_LEDS    17  // Number of LEDS
 
