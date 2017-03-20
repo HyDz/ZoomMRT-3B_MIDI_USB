@@ -7,12 +7,22 @@
    Declare Digitals Outputs
 */
 
-// The ZOOM MRT-B uses 0603 red LEDs a green one for the play switch.  The reds have 1.6V forward voltage and the green 1.8V
-// I want to glow them at 10mA since they can draws 20mA and the Arduino DUE digital out 15mA.
-// Some digital pins of the Arduino Due are limited to 3mA (2, 13, 16, 17, 18, 20, 21, 22, 43, 52), so I'll avoid them.
-// https://www.arduino.cc/en/Hacking/PinMappingSAM3X
-// LEDs are wired in common-anode the plus potential is the same on all LEDs  Cathode(-) "Arduino Out 1" ---|<--|  Anode(+) "Vcc"
-// You have to put the cathode to low (GND) in order to glow LED.                        "Arduino Out 2" ---|<--| "Vcc"                    
+/***********************************************************************************************************************************
+*                                                                                                                                  *
+     The ZOOM MRT-B uses 0603 red LEDs a green one for the play switch. The reds have 1.6V forward voltage and the green one 1.8V
+     I want to glow them at 10mA since they can draws 20mA and the Arduino DUE digital out 15mA.
+     So I'll use 180ohms resistor in serie for Red LEDs and 150ohms for the Green one.
+     Some digital pins of the Arduino Due are limited to 3mA (2, 13, 16, 17, 18, 20, 21, 22, 43, 52), so I'll avoid them.
+     https://www.arduino.cc/en/Hacking/PinMappingSAM3X
+     
+     LEDs are wired in common-anode the plus potential is the same on all LEDs
+     You have to put the cathode to low (GND) in order to glow LED.
+     
+     Cathode(-) "Arduino Out 1" ---|<--|  Anode(+) "Vcc"
+                "Arduino Out 2" ---|<--| "Vcc" 
+*                                                                                                                                 *
+***********************************************************************************************************************************/
+
 
 #define NUM_LEDS    17  // Number of LEDS
 
