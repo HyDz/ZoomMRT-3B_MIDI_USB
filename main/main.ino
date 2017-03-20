@@ -552,3 +552,4 @@ void setMidiOut() {
       }
     }
   }
+}
