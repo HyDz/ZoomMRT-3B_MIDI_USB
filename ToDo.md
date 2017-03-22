@@ -8,9 +8,9 @@
 - [x] Shift command
 - [ ] Inputs PCB
 - [x] Outputs PCB
-- [ ] Cut Traces
+- [x] Cut Traces
 - [ ] Wire Inputs
-- [ ] Wire Outputs
+- [x] Wire Outputs
 - [ ] Jog Wheel Test
 - [x] Jog Wheel Integration
 - [ ] BPM Count Test
