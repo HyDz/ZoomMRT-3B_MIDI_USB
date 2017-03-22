@@ -10,6 +10,13 @@
 #include "MIDIUSB.h"
 
 void controlChange(byte channel, byte control, byte value) {
+  Serial.print("CC: ");
+  Serial.print(channel);
+  Serial.print("| ");
+  Serial.print(control);
+  Serial.print("| ");
+  Serial.println(value);
+
   midiEventPacket_t event = {0x0B, 0xB0 | channel, control, value};
   MidiUSB.sendMIDI(event);
 }
@@ -26,22 +33,29 @@ void controlChange(byte channel, byte control, byte value) {
 // int ppqn = 0; //not yet implemented
 
 void setup() {
-
   Serial.begin(115200);
+  Serial.println("start setup");
+
   inputsinit(); // set inputs
   outputsinit(); // set outputs
+  Serial.println("setup end");
 
 
 }
 
 void loop() {
-  void getMidiIn();
-  void SetMidiOut();
+
+
+  getMidiIn();
+  setMidiOut();
+
+
 }
 
 
 
 void getMidiIn() {
+
 
   midiEventPacket_t rx;
   rx = MidiUSB.read();
@@ -181,9 +195,12 @@ void getMidiIn() {
       }
     }
   }
+
+
 }
 
 void setMidiOut() {
+
 
   // read both inputs of Jog Wheel
 
@@ -405,6 +422,7 @@ void setMidiOut() {
     if (valCrashPad != CrashPadState) {
       CrashPadState = valCrashPad;
       if (CrashPadState == LOW) {
+        Serial.println("SEND CRASH!!!!!!!!!!!!!!!!!!!!!");
         controlChange(MidiChannel, 52, 127); // Send CC
         MidiUSB.flush(); // Be sure CC is Send
         lastCrashPad = valCrashPad;
@@ -428,54 +446,49 @@ void setMidiOut() {
   }
 
   valRidePad = digitalRead(RidePad); // Read Analog Input Shift Function
-  valKickPad = digitalRead(KickPad);
-  valSnarePad = digitalRead(SnarePad);
-  valClosedHatPad = digitalRead(ClosedHatPad);
-  valOpenHatPad = digitalRead(OpenHatPad);
-
   if (valRidePad != lastRidePad) {
     // reset the debouncing timer
     lastDebounceTime = millis();
-    valKickPad = digitalRead(KickPad);
-    valSnarePad = digitalRead(SnarePad);
-    valClosedHatPad = digitalRead(ClosedHatPad);
-    valOpenHatPad = digitalRead(OpenHatPad);
-
   }
   if ((millis() - lastRidePadDebounceTime) > debouncePadDelay) { // Only send Midi CC if switch is pressed
     if (valRidePad != RidePadState) {
       digitalWrite(RideLed, LOW);
+      Serial.println("RIDE PUSHH!!!  ");
+      Serial.println(valRidePad);
       RidePadState = valRidePad;
-      valKickPad = digitalRead(KickPad);
-      valSnarePad = digitalRead(SnarePad);
-      valClosedHatPad = digitalRead(ClosedHatPad);
-      valOpenHatPad = digitalRead(OpenHatPad);
 
-      if (RidePadState == LOW && valKickPad == LOW) {
-        controlChange(MidiChannel, 64, 127); // Send CC
-        MidiUSB.flush(); // Be sure CC is Send
-        lastRidePad = valRidePad;
+      while (valRidePad == 0) {
+        valKickPad = digitalRead(KickPad);
+        valSnarePad = digitalRead(SnarePad);
+        valClosedHatPad = digitalRead(ClosedHatPad);
+        valOpenHatPad = digitalRead(OpenHatPad);
+        if (RidePadState == LOW && valKickPad == HIGH) {
+          controlChange(MidiChannel, 64, 127); // Send CC
+          MidiUSB.flush(); // Be sure CC is Send
+          lastRidePad = valRidePad;
+        }
+        if (RidePadState == LOW && valSnarePad == LOW) {
+          controlChange(MidiChannel, 65, 127); // Send CC
+          MidiUSB.flush(); // Be sure CC is Send
+          lastRidePad = valRidePad;
+        }
+        if (RidePadState == LOW && valClosedHatPad == LOW) {
+          controlChange(MidiChannel, 66, 127); // Send CC
+          MidiUSB.flush(); // Be sure CC is Send
+          lastRidePad = valRidePad;
+        }
+        if (RidePadState == LOW && valOpenHatPad == LOW) {
+          controlChange(MidiChannel, 67, 127); // Send CC
+          MidiUSB.flush(); // Be sure CC is Send
+          lastRidePad = valRidePad;
+        }
+        valRidePad = digitalRead(RidePad);
       }
-      if (RidePadState == LOW && valSnarePad == LOW) {
-        controlChange(MidiChannel, 65, 127); // Send CC
-        MidiUSB.flush(); // Be sure CC is Send
-        lastRidePad = valRidePad;
-      }
-      if (RidePadState == LOW && valClosedHatPad == LOW) {
-        controlChange(MidiChannel, 66, 127); // Send CC
-        MidiUSB.flush(); // Be sure CC is Send
-        lastRidePad = valRidePad;
-      }
-      if (RidePadState == LOW && valOpenHatPad == LOW) {
-        controlChange(MidiChannel, 67, 127); // Send CC
-        MidiUSB.flush(); // Be sure CC is Send
-        lastRidePad = valRidePad;
-      }
-
+    } else {
+      digitalWrite(RideLed, HIGH);
     }
-  } else {
-    digitalWrite(RideLed, HIGH);
   }
+
 
   valFunctionPad = digitalRead(FunctionPad); // Read Analog Input
   if (valFunctionPad != lastFunctionPad) {
@@ -552,4 +565,6 @@ void setMidiOut() {
       }
     }
   }
+
+
 }
