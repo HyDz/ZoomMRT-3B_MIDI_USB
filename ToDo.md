@@ -2,20 +2,24 @@
 ##Zoom MRT-3B
 
 - [x] Main.ino
-- [x] inputs.h
-- [x] outputs.h
+- [x] IOS.h
+- [x] Screen.h
+- [x] MiniMidi.h
 
 - [x] Shift command
-- [ ] Inputs PCB
+- [x] Inputs PCB
 - [x] Outputs PCB
 - [x] Cut Traces
-- [ ] Wire Inputs
+- [x] Wire Inputs
 - [x] Wire Outputs
-- [ ] Jog Wheel Test
+- [x] Jog Wheel Test
 - [x] Jog Wheel Integration
-- [ ] BPM Count Test
-- [ ] BPM Count Integration
-- [ ] Do Traktor Map
+- [x] BPM Count Test
+- [x] BPM Count Integration
+- [x] Screen Test
+- [x] Screen Integration
+- [ ] Multiplexing LEDS in order to draw less current and avoid voltage drops
+- [ ] Do Traktor Map - IN PROGRESS
 
 - [ ] Better Get Midi In Function
 - [x] Better Declaration and set of pins
