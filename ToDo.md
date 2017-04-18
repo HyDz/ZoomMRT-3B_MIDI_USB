@@ -18,10 +18,15 @@
 - [x] BPM Count Integration
 - [x] Screen Test
 - [x] Screen Integration
+- [x] Better Declaration and set of pins
+- [x] Easy On/Off Debug
+
+
+- [ ] Lighter Screen Function
 - [ ] Multiplexing LEDS in order to draw less current and avoid voltage drops
 - [ ] Do Traktor Map - IN PROGRESS
 
+
 - [ ] Better Get Midi In Function
-- [x] Better Declaration and set of pins
 
 - [ ] Use attach interrupts for all inputs // Bad Idea??
