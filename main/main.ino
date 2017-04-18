@@ -27,7 +27,6 @@ void setup() {
 }
 
 void loop() {
-  //  Serial.println("L00P");
   getMidiIn();
   readJogWheel();
   setMidiOut();
