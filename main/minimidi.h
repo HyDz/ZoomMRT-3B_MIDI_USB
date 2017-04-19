@@ -16,6 +16,7 @@ void controlChange(byte channel, byte control, byte value) {
 #endif
   midiEventPacket_t event = {0x0B, 0xB0 | channel, control, value};
   MidiUSB.sendMIDI(event);
+#if USE_SCREEN
   clearscreen();
   String ScrennedVal = String(value, DEC);
   String ScrennedCC = String(control, DEC);
@@ -23,5 +24,6 @@ void controlChange(byte channel, byte control, byte value) {
   printscreen(45, 25, 1, ScrennedCC);
   printscreen(55, 25, 1, " | ");
   printscreen(72, 25, 1, ScrennedVal);
+#endif
   // return;
 }
