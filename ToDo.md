@@ -19,8 +19,9 @@
 - [x] Screen Test
 - [x] Screen Integration
 - [x] Better Declaration and set of pins
-- [x] Easy On/Off Debug
-
+- [x] Easy On/Off Debug and bench
+- [x] Easy On/Off Screen
+- [ ] DataWheel Debounce
 
 - [ ] Lighter Screen Function
 - [ ] Multiplexing LEDS in order to draw less current and avoid voltage drops
