@@ -37,13 +37,13 @@
 
 #define JogWheelPinA            9     // Declare JogWheel Pins
 #define JogWheelPinB            8     // no interrupt required
-#define JogWheelDebounce        50    // time before new Touch On send. Decrease to more reactive
-#define JogWheelToggle          20    // time before new Touch Off send. Decrease to more reactive
-#define JogWheelMaxSpeed        850   // Max Jogvalue give by getJogSpeed function, used to map to max midi value (127)
 
+#define JogWheelDebounce        7    // time before new Touch On send. Decrease to more reactive
+#define JogWheelToggle          20    // time before new Touch Off send. Decrease to more reactive
+#define JogWheelMaxSpeed        12000   // Max Jogvalue give by getJogSpeed function, used to map to max midi value (127)
 
 #define debounceSwitchDelay     70    // the debounce time of switchs; to prevent flickers. Increase if the output flickers
-#define debouncePadDelay        1     // the debounce time of pads; to prevent flickers. Increase if the output flickers
+#define debouncePadDelay        7     // the debounce time of pads; to prevent flickers. Increase if the output flickers
 
 #define NUM_BUTTONS             20    // Number of digital inputs use switchs and pad only 
 #define NUMBER_OF_LEDS          17    // Number of LEDS
@@ -333,11 +333,13 @@ void getBPM(byte ccvalin) {
     BPMpulse = BPMpulse / 1000; // convert it in seconds
     BPMpulse = 1 / BPMpulse; // get bpm in Hz frequency f=1/t
     BPMvalue = BPMpulse * 60; // BPM=F*60
+#if USE_SCREEN
     String ScrennedBPM = String(BPMvalue);
     String ScrennedPulse = String(BPMpulse);
     clearscreen();
     printscreen(0, 15, 1, "BPM: ");
     printscreen(25, 10, 2, ScrennedBPM);
+#endif
     lastBPMtime = millis();
   } else {
     return;
@@ -865,4 +867,5 @@ void readJogWheel(void) {
   // JogWheelLastTime = millis();
   JogWheelPinALast = nJogWheel;                     // Update PinA Read
 }
+
 
